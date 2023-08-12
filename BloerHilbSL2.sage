@@ -39,7 +39,7 @@ def hilbfcn(S):
     f = product([(1- RS.gen(i+1)*RS.gen(0)^j) for i in range(n) for j in range(S[i],0,-2)])
     fcoe = [f.coefficient({RS.gen(0):i}) for i in range(deg+1)]
     Amat = matrix([[ (fcoe[j-i] if j-i >= 0 else 0) - (fcoe[i+j+2] if i+j+2 <= deg else 0) for i in range(deg+1)] for j in range(deg+1)])
-    return factor(Amat.submatrix(1,1,deg,deg).det())/factor(Amat.det())
+    return factor(Amat.submatrix(1,1,deg,deg).det())/factor(Amat.det()* product([1 - RS.gen(i+1) if S[i] % 2 == 0 else 1 for i in range(n)]))
 
 
 """
